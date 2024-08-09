@@ -6,11 +6,11 @@ function productFecth(){
 }
 function *fetchProducts(){
     const products=yield call(productFecth);
-    yield put({type:'fetch_success',payload:products});
+    yield put({type:'FECTH_SUCCESS',payload:products});
 }
 
 function *fetchAllTProducts() {
-    yield takeEvery('Fecth_Products', fetchProducts);
+    yield takeEvery('FETCH_PRODUCTS', fetchProducts);
   }
-  
+
 export default fetchAllTProducts;

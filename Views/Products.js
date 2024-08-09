@@ -65,10 +65,10 @@ const Products = () => {
 
     return (
         <View style={styles.container}>
-            <Navbar cartCount={cartItems.length} screen={"Product"} title={"Shopping"} />
+            <Navbar cartCount={cartItems?.length} screen={"Product"} title={"Shopping"} />
             <FlatList
                 data={products}
-                keyExtractor={(item) => item.id.toString()}
+                keyExtractor={(item) => item?.id?.toString()}
                 renderItem={renderItem}
                 contentContainerStyle={styles.listContainer}
             />
