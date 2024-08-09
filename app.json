@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Shopping",
-    "slug": "Shopping",
+    "slug": "shopping",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,10 +18,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.girishgg.shopping"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e49a60e8-a6bf-47cb-8a8d-7513fbff7cdb"
+      }
+    },
+    "owner": "girishggg"
   }
 }

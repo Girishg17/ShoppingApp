@@ -31,6 +31,7 @@ export default Navbar;
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: -30,
     backgroundColor: '#2CCBE4',
     height: 60,
     flexDirection: 'row',

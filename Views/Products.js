@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
 import Navbar from '../components/Navbar'; 
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts, addToCart } from '../Redux/action'; 
@@ -12,9 +12,20 @@ const Products = () => {
     const cartItems = useSelector(state => state.cart); 
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        dispatch(fetchProducts());
+        const fetchData = async () => {
+            try {
+                await dispatch(fetchProducts());
+            } catch (error) {
+                console.error("Failed to fetch products:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
     }, [dispatch]);
 
     const handleProductPress = (item) => {
@@ -66,12 +77,19 @@ const Products = () => {
     return (
         <View style={styles.container}>
             <Navbar cartCount={cartItems?.length} screen={"Product"} title={"Shopping"} />
-            <FlatList
-                data={products}
-                keyExtractor={(item) => item?.id?.toString()}
-                renderItem={renderItem}
-                contentContainerStyle={styles.listContainer}
-            />
+            {loading ? (
+                <View style={styles.loaderContainer}>
+                    <ActivityIndicator size="large" color="#0000ff" />
+                    <Text style={styles.loaderText}>Getting products...</Text>
+                </View>
+            ) : (
+                <FlatList
+                    data={products}
+                    keyExtractor={(item) => item?.id?.toString()}
+                    renderItem={renderItem}
+                    contentContainerStyle={styles.listContainer}
+                />
+            )}
             <ProductModal 
                 visible={isModalVisible} 
                 onClose={() => setIsModalVisible(false)} 
@@ -142,6 +160,16 @@ const styles = StyleSheet.create({
     },
     description: {
         fontSize: 12,
+        color: '#888',
+    },
+    loaderContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    loaderText: {
+        marginTop: 10,
+        fontSize: 16,
         color: '#888',
     },
 });
