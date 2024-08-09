@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, Alert } from 'react-native';
 import Navbar from '../components/Navbar'; 
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts, addToCart } from '../Redux/action'; // Import addToCart
+import { fetchProducts, addToCart } from '../Redux/action'; 
 import { FontAwesome } from '@expo/vector-icons'; 
 import ProductModal from '../components/ProductModal'; 
 
 const Products = () => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.products);
-    const cartItems = useSelector(state => state.cart); // Access cart items from the store
+    const cartItems = useSelector(state => state.cart); 
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [isModalVisible, setIsModalVisible] = useState(false);
 

@@ -29,15 +29,13 @@ export const reducer = (state = initialState, action) => {
                 ),
             };
             case 'DECREMENT_QUANTITY': {
-                const updatedCart = state.cart.map((item) =>
-                    item.id === action.payload.id
-                        ? { ...item, quantity: Math.max(item.quantity - 1, 0) } 
-                        : item
-                );
-                const filteredCart = updatedCart.filter((item) => item.quantity > 0);
                 return {
                     ...state,
-                    cart: filteredCart,
+                    cart: state.cart.map((item) =>
+                        item.id === action.payload.id
+                            ? { ...item, quantity: item.quantity - 1 }
+                            : item
+                    ),
                 };
             }
             

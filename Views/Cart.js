@@ -29,6 +29,10 @@ function Cart() {
     };
 
     const handleDecrement = (item) => {
+        if(item.quantity === 1) {   
+            handleRemove(item);
+            return;
+        }
         dispatch(decrementQuantity(item));
     };
 
@@ -65,6 +69,7 @@ function Cart() {
     return (
         <View style={styles.container}>
             <Navbar screen={"Cart"} title={"Cart"} />
+            {cartItems.length === 0? <Text style={{textAlign: 'center', marginTop: 16}}>Cart is empty</Text> : null}
             <FlatList
                 data={cartItems}
                 keyExtractor={(item) => item?.id?.toString()}
