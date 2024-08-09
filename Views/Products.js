@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, Alert } from 'react-native';
 import Navbar from '../components/Navbar'; 
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts } from '../Redux/action';
+import { fetchProducts, addToCart } from '../Redux/action'; // Import addToCart
 import { FontAwesome } from '@expo/vector-icons'; 
-import ProductModal from '../components/ProductModal'; // Import the modal component
+import ProductModal from '../components/ProductModal'; 
 
 const Products = () => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.products);
+    const cartItems = useSelector(state => state.cart); // Access cart items from the store
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -21,9 +22,15 @@ const Products = () => {
         setIsModalVisible(true);
     };
 
-    const handleAddToCart = () => {
-        Alert.alert('Added to Cart', selectedProduct?.title);
-        setIsModalVisible(false);
+    const handleAddToCart = (product) => {
+        const isProductInCart = cartItems.some(item => item.id === product.id);
+
+        if (isProductInCart) {
+            Alert.alert("Product already in cart", "This product is already in your cart.");
+        } else {
+            dispatch(addToCart(product));
+            setIsModalVisible(false);
+        }
     };
 
     const renderStars = (rating) => {
@@ -50,15 +57,15 @@ const Products = () => {
                     {renderStars(item.rating.rate)}
                     <Text style={styles.ratingCount}>({item.rating.count})</Text>
                 </View>
-                <Text style={styles.price}>Rs.{" "}{item.price}</Text>
-                <Text style={styles.category}>Category:{" "}{item.category}</Text>
+                <Text style={styles.price}>Rs. {item.price}</Text>
+                <Text style={styles.category}>Category: {item.category}</Text>
             </View>
         </TouchableOpacity>
     );
 
     return (
         <View style={styles.container}>
-            <Navbar cartCount={1} />
+            <Navbar cartCount={cartItems.length} screen={"Product"} title={"Shopping"} />
             <FlatList
                 data={products}
                 keyExtractor={(item) => item.id.toString()}
@@ -69,7 +76,7 @@ const Products = () => {
                 visible={isModalVisible} 
                 onClose={() => setIsModalVisible(false)} 
                 product={selectedProduct} 
-                onAddToCart={handleAddToCart} 
+                onAddToCart={() => handleAddToCart(selectedProduct)} 
             />
         </View>
     );
@@ -116,7 +123,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: 'black',
         marginBottom: 4,
-        fontWeight:'bold'
+        fontWeight: 'bold'
     },
     category: {
         fontSize: 14,

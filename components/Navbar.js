@@ -3,13 +3,14 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { useNavigation } from '@react-navigation/native'; 
 
-function Navbar({ cartCount }) {
+function Navbar({ cartCount,screen,title }) {
   const navigation = useNavigation(); 
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Shopping</Text>
-      <TouchableOpacity 
+      <Text style={styles.title}>{title}</Text>
+      {screen==='Product'?(
+         <TouchableOpacity 
         style={styles.cartButton} 
         onPress={() => navigation.navigate('Cart')}
       >
@@ -20,6 +21,8 @@ function Navbar({ cartCount }) {
           </View>
         )}
       </TouchableOpacity>
+      ):null}
+     
     </View>
   );
 }

@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { MaterialIcons } from '@expo/vector-icons'; 
 
-const ProductModal = ({ visible, onClose, product, onAddToCart }) => {
+const ProductModal = ({ visible, onClose, product={}, onAddToCart }) => {
   return (
     <Modal
       transparent={true}
@@ -31,7 +31,7 @@ const ProductModal = ({ visible, onClose, product, onAddToCart }) => {
           <View style={styles.modalActions}>
             <TouchableOpacity
               style={styles.addToCartButton}
-              onPress={onAddToCart}
+              onPress={()=>{onAddToCart()}}
             >
               <MaterialIcons name="shopping-cart" size={30} color="white" />
               <Text style={styles.addToCartText}>Add to Cart</Text>
