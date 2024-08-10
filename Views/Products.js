@@ -88,6 +88,8 @@ const Products = () => {
                     keyExtractor={(item) => item?.id?.toString()}
                     renderItem={renderItem}
                     contentContainerStyle={styles.listContainer}
+                    initialNumToRender={5}
+                    maxToRenderPerBatch={5}
                 />
             )}
             <ProductModal 

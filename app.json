@@ -1,13 +1,13 @@
 {
   "expo": {
     "name": "Shopping",
-    "slug": "shopping",
+    "slug": "shopping-viqfoq1hvh6ua-wzvihee",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splash2.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,14 +19,14 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.girishgg.shopping"
+      "package": "com.girishggg.shopping"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "e49a60e8-a6bf-47cb-8a8d-7513fbff7cdb"
+        "projectId": "4eea00e7-9c5e-406b-8edf-b3599d819aae"
       }
     },
     "owner": "girishggg"
