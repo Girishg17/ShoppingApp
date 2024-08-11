@@ -1,3 +1,13 @@
+# About Project
+  - It is an Basic Shopping App with feature involve
+     - Fecthing The Item
+     - Add to Cart
+     - Increment/Decrement Quantity
+   ## Tech stacks Involved
+   - React Native
+   - Redux
+   - Redux-Sagas
+    
 # Getting Started
  ### There are Two ways you can Install this project 
 ## Procedure 1
@@ -19,4 +29,5 @@
     [Click Here for APK](https://www.upload-apk.com/Kjfak3RUaufS3cV)
  - Install The .apk file
  - As it says the Application is not secure. You can go ahead with installation as there is no data of user is captured.
+ - Please wait for few seconds to load Items
  
